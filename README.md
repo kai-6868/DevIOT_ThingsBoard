@@ -1,93 +1,93 @@
-# ThingsBoard IoT Device Simulation
+# Mô phỏng thiết bị IoT ThingsBoard
 
-This project simulates an IoT device communicating with ThingsBoard IoT Cloud Platform, implementing device provisioning and telemetry data transmission using both MQTT and HTTP protocols.
+Dự án này mô phỏng một thiết bị IoT giao tiếp với Nền tảng Đám mây ThingsBoard IoT, thực hiện cung cấp thiết bị (device provisioning) và truyền dữ liệu telemetry sử dụng cả hai giao thức MQTT và HTTP.
 
-## Results
+## Kết quả
 
-The project successfully demonstrates IoT device communication with ThingsBoard using both MQTT and HTTP protocols. Below are screenshots showing the complete workflow:
+Dự án đã thể hiện thành công khả năng giao tiếp của thiết bị IoT với ThingsBoard sử dụng cả hai giao thức MQTT và HTTP. Dưới đây là các ảnh chụp màn hình hiển thị toàn bộ quy trình:
 
-### Device Provisioning
+### Cung cấp thiết bị (Device Provisioning)
 
-![Device Provisioning](check_connect_thingsboard.png)
+![Cung cấp thiết bị](check_connect_thingsboard.png)
 
-Successfully provisioned device "MyIoTDevice" via MQTT. The script connects to ThingsBoard's MQTT broker, sends provisioning credentials, and receives an ACCESS_TOKEN for subsequent telemetry transmission.
+Đã cung cấp thành công thiết bị "MyIoTDevice" qua MQTT. Kịch bản kết nối với MQTT broker của ThingsBoard, gửi thông tin xác thực cung cấp và nhận về ACCESS_TOKEN (mã truy cập) để truyền dữ liệu telemetry sau đó.
 
-### Sending Telemetry via MQTT
+### Gửi Telemetry qua MQTT
 
-![MQTT Telemetry Transmission](datasend_MQTT.png)
+![Truyền Telemetry qua MQTT](datasend_MQTT.png)
 
-Telemetry data transmitted via MQTT protocol showing timestamped sensor readings (temperature, humidity, pressure, light) sent to ThingsBoard at 2-second intervals.
+Dữ liệu telemetry được truyền qua giao thức MQTT hiển thị các chỉ số cảm biến có đóng dấu thời gian (nhiệt độ, độ ẩm, áp suất, ánh sáng) được gửi đến ThingsBoard với khoảng thời gian 2 giây.
 
-### Sending Telemetry via HTTP
+### Trực quan hóa dữ liệu - Dữ liệu MQTT
 
-![HTTP Telemetry Transmission](datasend_Thingsboard_HTTP_API.png)
+![Bảng điều khiển ThingsBoard - MQTT](datareceived_Thingsboard_MQTT.png)
 
-Telemetry data transmitted via HTTP REST API showing timestamped sensor readings successfully posted to ThingsBoard using HTTPS on port 443.
+Biểu đồ chuỗi thời gian thực hiển thị dữ liệu telemetry nhận được qua MQTT. Biểu đồ hiển thị các giá trị nhiệt độ (xanh dương), áp suất (xanh lá), ánh sáng (đỏ) và độ ẩm (vàng) theo thời gian, xác nhận việc nhập dữ liệu thành công.
 
-### Data Visualization - MQTT Data
+### Gửi Telemetry qua HTTP
 
-![ThingsBoard Dashboard - MQTT](datareceived_Thingsboard_MQTT.png)
+![Truyền Telemetry qua HTTP](datasend_Thingsboard_HTTP_API.png)
 
-Real-time timeseries chart displaying telemetry data received via MQTT. The chart shows temperature (blue), pressure (green), light (red), and humidity (yellow) values over time, confirming successful data ingestion.
+Dữ liệu telemetry được truyền qua HTTP REST API hiển thị các chỉ số cảm biến có đóng dấu thời gian được gửi thành công đến ThingsBoard sử dụng HTTPS trên cổng 443.
 
-### Data Visualization - HTTP Data
+### Trực quan hóa dữ liệu - Dữ liệu HTTP
 
-![ThingsBoard Dashboard - HTTP](Datareceived_Thingsboard_HTT_PAPI.png)
+![Bảng điều khiển ThingsBoard - HTTP](Datareceived_Thingsboard_HTT_PAPI.png)
 
-Real-time timeseries chart displaying telemetry data received via HTTP API. The visualization confirms that data sent through HTTP REST API is properly received and visualized in ThingsBoard.
+Biểu đồ chuỗi thời gian thực hiển thị dữ liệu telemetry nhận được qua HTTP API. Sự trực quan hóa xác nhận rằng dữ liệu gửi qua HTTP REST API được nhận và hiển thị đúng cách trong ThingsBoard.
 
-## Project Structure
+## Cấu trúc dự án
 
 ```
 DevIOT-ThingsBoard/
-├── config.py                    # Configuration loader
-├── provision_device.py          # Device provisioning via MQTT
-├── send_telemetry_mqtt.py       # Send telemetry via MQTT
-├── send_telemetry_http.py       # Send telemetry via HTTP
-├── requirements.txt             # Python dependencies
-├── .env.example                 # Environment variables template
-├── .env                         # Your environment variables (not tracked by git)
-├── access_token.txt             # Generated ACCESS_TOKEN (created after provisioning)
-└── README.md                    # This file
+├── config.py                    # Trình tải cấu hình
+├── provision_device.py          # Cung cấp thiết bị qua MQTT
+├── send_telemetry_mqtt.py       # Gửi telemetry qua MQTT
+├── send_telemetry_http.py       # Gửi telemetry qua HTTP
+├── requirements.txt             # Các thư viện phụ thuộc Python
+├── .env.example                 # Mẫu biến môi trường
+├── .env                         # Biến môi trường của bạn (không được git theo dõi)
+├── access_token.txt             # ACCESS_TOKEN đã tạo (được tạo sau khi cung cấp)
+└── README.md                    # Tệp này
 ```
 
-## Features
+## Tính năng
 
-### 1. Device Provisioning (MQTT)
-- Automatically register a new device with ThingsBoard
-- Receive ACCESS_TOKEN for authentication
-- Save token for future use
+### 1. Cung cấp thiết bị (MQTT)
+- Tự động đăng ký thiết bị mới với ThingsBoard
+- Nhận ACCESS_TOKEN để xác thực
+- Lưu token để sử dụng trong tương lai
 
-### 2. Send Telemetry via MQTT
-- Connect to ThingsBoard using ACCESS_TOKEN
-- Send simulated sensor data (temperature, humidity, pressure, light)
-- Real-time data transmission
+### 2. Gửi Telemetry qua MQTT
+- Kết nối với ThingsBoard sử dụng ACCESS_TOKEN
+- Gửi dữ liệu cảm biến mô phỏng (nhiệt độ, độ ẩm, áp suất, ánh sáng)
+- Truyền dữ liệu thời gian thực
 
-### 3. Send Telemetry via HTTP
-- Use HTTP REST API to send telemetry data
-- Simple POST requests with ACCESS_TOKEN authentication
-- Configurable message frequency
+### 3. Gửi Telemetry qua HTTP
+- Sử dụng HTTP REST API để gửi dữ liệu telemetry
+- Các yêu cầu POST đơn giản với xác thực bằng ACCESS_TOKEN
+- Tần suất tin nhắn có thể cấu hình
 
-## Setup Instructions
+## Hướng dẫn cài đặt
 
-### Prerequisites
-- Python 3.7 or higher
-- ThingsBoard account (use demo.thingsboard.io or your own instance)
-- Device provisioning credentials from ThingsBoard
+### Yêu cầu tiên quyết
+- Python 3.7 hoặc cao hơn
+- Tài khoản ThingsBoard (sử dụng demo.thingsboard.io hoặc instance của riêng bạn)
+- Thông tin xác thực cung cấp thiết bị từ ThingsBoard
 
-### Installation
+### Cài đặt
 
-1. Install Python dependencies:
+1. Cài đặt các thư viện phụ thuộc Python:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Create `.env` file from the template:
+2. Tạo tệp `.env` từ tệp mẫu:
 ```bash
 cp .env.example .env
 ```
 
-3. Edit `.env` with your actual ThingsBoard credentials:
+3. Chỉnh sửa `.env` với thông tin xác thực ThingsBoard thực tế của bạn:
 ```bash
 THINGSBOARD_HOST=demo.thingsboard.io
 PROVISION_DEVICE_KEY=your_provision_key
@@ -95,54 +95,54 @@ PROVISION_DEVICE_SECRET=your_provision_secret
 DEVICE_NAME=MyIoTDevice
 ```
 
-**Note:** Never commit `.env` to version control (it's in `.gitignore`).
+**Lưu ý:** Không bao giờ commit `.env` vào version control (nó đã có trong `.gitignore`).
 
-### Getting Provisioning Credentials
+### Lấy thông tin xác thực cung cấp (Provisioning Credentials)
 
-1. Log in to ThingsBoard
-2. Go to **Device profiles** → Select your profile → **Device provisioning**
-3. Enable provisioning and note the:
+1. Đăng nhập vào ThingsBoard
+2. Đi đến **Device profiles** → Chọn profile của bạn → **Device provisioning**
+3. Bật provisioning và ghi lại:
    - Provision device key
    - Provision device secret
 
-## Usage
+## Sử dụng
 
-### Step 1: Provision Device
+### Bước 1: Cung cấp thiết bị
 
-Run the provisioning script to register your device:
+Chạy kịch bản cung cấp để đăng ký thiết bị của bạn:
 
 ```bash
 python provision_device.py
 ```
 
-This will:
-- Connect to ThingsBoard MQTT broker
-- Send provisioning request
-- Receive and save ACCESS_TOKEN to `access_token.txt`
+Việc này sẽ:
+- Kết nối đến ThingsBoard MQTT broker
+- Gửi yêu cầu cung cấp
+- Nhận và lưu ACCESS_TOKEN vào `access_token.txt`
 
-### Step 2: Send Telemetry via MQTT
+### Bước 2: Gửi Telemetry qua MQTT
 
 ```bash
 python send_telemetry_mqtt.py
 ```
 
-You'll be prompted for:
-- Number of messages to send
-- Interval between messages
+Bạn sẽ được nhắc nhập:
+- Số lượng tin nhắn muốn gửi
+- Khoảng thời gian giữa các tin nhắn
 
-The script will send simulated sensor data to ThingsBoard.
+Kịch bản sẽ gửi dữ liệu cảm biến mô phỏng đến ThingsBoard.
 
-### Step 3: Send Telemetry via HTTP
+### Bước 3: Gửi Telemetry qua HTTP
 
 ```bash
 python send_telemetry_http.py
 ```
 
-Similar to MQTT, but uses HTTP POST requests instead.
+Tương tự như MQTT, nhưng sử dụng yêu cầu HTTP POST để thay thế.
 
-## Telemetry Data Format
+## Định dạng dữ liệu Telemetry
 
-The programs send simulated sensor data:
+Các chương trình gửi dữ liệu cảm biến mô phỏng:
 
 ```json
 {
@@ -153,42 +153,42 @@ The programs send simulated sensor data:
 }
 ```
 
-## Verification
+## Xác minh
 
-After running the programs:
+Sau khi chạy các chương trình:
 
-1. Log in to ThingsBoard
-2. Navigate to **Devices**
-3. Find your device (e.g., "MyIoTDevice")
-4. Check **Latest telemetry** to see received data
-5. View data on dashboards or create visualizations
+1. Đăng nhập vào ThingsBoard
+2. Điều hướng đến **Devices**
+3. Tìm thiết bị của bạn (ví dụ: "MyIoTDevice")
+4. Kiểm tra **Latest telemetry** để xem dữ liệu đã nhận
+5. Xem dữ liệu trên dashboard hoặc tạo các trực quan hóa
 
-## Troubleshooting
+## Khắc phục sự cố
 
-### Connection Issues
-- Verify `THINGSBOARD_HOST` in `.env` file
-- Check firewall settings for ports 1883 (MQTT) and 443 (HTTPS)
-- Ensure internet connectivity
+### Vấn đề kết nối
+- Xác minh `THINGSBOARD_HOST` trong tệp `.env`
+- Kiểm tra cài đặt tường lửa cho cổng 1883 (MQTT) và 443 (HTTPS)
+- Đảm bảo có kết nối internet
 
-### Provisioning Fails
-- Verify provisioning credentials are correct
-- Check that device provisioning is enabled in ThingsBoard
-- Ensure device name doesn't already exist
+### Cung cấp thất bại
+- Xác minh thông tin xác thực cung cấp là chính xác
+- Kiểm tra xem cung cấp thiết bị đã được bật trong ThingsBoard chưa
+- Đảm bảo tên thiết bị chưa tồn tại
 
-### No Data Received
-- Verify ACCESS_TOKEN is correct
-- Check ThingsBoard device status
-- Review ThingsBoard logs for errors
+### Không nhận được dữ liệu
+- Xác minh ACCESS_TOKEN là chính xác
+- Kiểm tra trạng thái thiết bị trên ThingsBoard
+- Xem nhật ký ThingsBoard để tìm lỗi
 
-## Dependencies
+## Thư viện phụ thuộc
 
-- `paho-mqtt`: MQTT client library
-- `requests`: HTTP client library
+- `paho-mqtt`: Thư viện client MQTT
+- `requests`: Thư viện client HTTP
 
-## License
+## Giấy phép
 
-This project is for educational purposes as part of IoT coursework.
+Dự án này dành cho mục đích giáo dục như một phần của khóa học IoT.
 
-## Author
+## Tác giả
 
-Created for IoT Programming Course - Assignment 9
+Được tạo cho Khóa học Lập trình IoT - Bài tập 9
